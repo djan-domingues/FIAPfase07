@@ -1,6 +1,7 @@
 package br.com.fiap.entity;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,6 +11,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -34,20 +38,39 @@ public class Fornecedor {
 	@Column(name="dt_modificacao")
 	private Calendar dataModificacao;
 	
+	@OneToOne
+	private Contato contato;
 	
+	@OneToOne
+	private Endereco endereco;
+	
+	@OneToMany
+	private List<Produto> produtos;
+	
+	@ManyToMany(mappedBy = "fornecedores")
+	private List<Loja> lojas;
 	
 	public Fornecedor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Fornecedor(int codigo, String nome, Calendar dataCadastro, Calendar dataModificacao) {
+	
+
+	public Fornecedor(int codigo, String nome, Calendar dataCadastro, Calendar dataModificacao, Contato contato,
+			Endereco endereco,  List<Loja> lojas, List<Produto> produtos) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
 		this.dataCadastro = dataCadastro;
 		this.dataModificacao = dataModificacao;
+		this.contato = contato;
+		this.lojas = lojas;
+		this.produtos = produtos;
+		this.endereco = endereco;
 	}
+
+
 
 	public int getCodigo() {
 		return codigo;
@@ -80,5 +103,51 @@ public class Fornecedor {
 	public void setDataModificacao(Calendar dataModificacao) {
 		this.dataModificacao = dataModificacao;
 	}
+
+
+
+	public Contato getContato() {
+		return contato;
+	}
+
+
+
+	public void setContato(Contato contato) {
+		this.contato = contato;
+	}
+
+
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
+	public List<Produto> getProduto() {
+		return produtos;
+	}
+
+	public void setProduto(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
+
+
+	public List<Loja> getLoja() {
+		return lojas;
+	}
+
+
+
+	public void setLoja(List<Loja> lojas) {
+		this.lojas = lojas;
+	}
+	
+	
 
 }
