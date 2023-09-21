@@ -3,9 +3,9 @@ package br.com.fiap.entity;
 import java.util.Calendar;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,10 +13,10 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name="tb_produto")
@@ -34,12 +34,12 @@ public class Produto {
 	@Column(name="vl_preco")
 	private double preco;
 	
-	@Temporal(TemporalType.DATE)
-	@Column(name="dt_data_validade")
-	private Calendar dataValidade;
-	
 	@Enumerated(EnumType.STRING)
-	private Estado estado;
+	private Tipo tipo;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "cd_estabelecimento")
+	private Estabelecimento estabelecimento;
 	
 	@Column(name="dt_cadastro")
 	@CreationTimestamp
@@ -49,9 +49,6 @@ public class Produto {
 	@UpdateTimestamp
 	private Calendar dataModificacao;
 	
-	@Formula("vl_preco*0.9")
-	private double precoDesconto;
-	
 	
 	
 	public Produto() {
@@ -59,81 +56,104 @@ public class Produto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Produto(int id, String nome, double preco, Calendar dataValidade, Estado estado, Calendar dataCadastro,
-			Calendar dataModificacao, double precoDesconto) {
+
+
+	public Produto(int id, String nome, double preco, Tipo tipo, Estabelecimento estabelecimento) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
-		this.dataValidade = dataValidade;
-		this.estado = estado;
-		this.dataCadastro = dataCadastro;
-		this.dataModificacao = dataModificacao;
-		this.precoDesconto = precoDesconto;
+		this.tipo = tipo;
+		this.estabelecimento = estabelecimento;
 	}
+
+
 
 	public int getId() {
 		return id;
 	}
 
+
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
+
 
 	public String getNome() {
 		return nome;
 	}
 
+
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+
 
 	public double getPreco() {
 		return preco;
 	}
 
+
+
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
 
-	public Calendar getDataValidade() {
-		return dataValidade;
+
+
+	public Tipo getTipo() {
+		return tipo;
 	}
 
-	public void setDataValidade(Calendar dataValidade) {
-		this.dataValidade = dataValidade;
+
+
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
 	}
 
-	public Estado getEstado() {
-		return estado;
+
+
+	public Estabelecimento getEstabelecimento() {
+		return estabelecimento;
 	}
 
-	public void setEstado(Estado estado) {
-		this.estado = estado;
+
+
+	public void setEstabelecimento(Estabelecimento estabelecimento) {
+		this.estabelecimento = estabelecimento;
 	}
+
+
 
 	public Calendar getDataCadastro() {
 		return dataCadastro;
 	}
 
+
+
 	public void setDataCadastro(Calendar dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
+
+
 
 	public Calendar getDataModificacao() {
 		return dataModificacao;
 	}
 
+
+
 	public void setDataModificacao(Calendar dataModificacao) {
 		this.dataModificacao = dataModificacao;
 	}
 
-	public double getPrecoDesconto() {
-		return precoDesconto;
-	}
-
-	public void setPrecoDesconto(double precoDesconto) {
-		this.precoDesconto = precoDesconto;
-	}
 	
+	
+
 }
+	
+
