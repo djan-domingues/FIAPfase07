@@ -1,7 +1,5 @@
 package br.com.fiap.teste;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.com.fiap.dao.ProdutoDAO;
@@ -18,11 +16,17 @@ public class ProdutoDAOteste {
 		
 		ProdutoDAO dao = new ProdutoDAO(em);
 		
-		List<Produto> lista = dao.buscarPorData(new GregorianCalendar(2023, Calendar.SEPTEMBER, 20));
+		//List<Produto> lista = dao.buscarPorData(new GregorianCalendar(2023, Calendar.SEPTEMBER, 20));
 		
-		for(Produto produto : lista) {
-			System.out.println(produto.getNome());
-		} 
+//		List<Produto> lista = dao.buscarPorNomeEstabelecimento("perus");
+		
+		int qt = dao.atualizarValor(30.00, 40.00);
+		
+//		for(Produto produto : lista) {
+//			System.out.println(produto.getNome());
+//		} 
+		
+		System.out.println(qt);
 		
 		em.close();
 		fabrica.close();

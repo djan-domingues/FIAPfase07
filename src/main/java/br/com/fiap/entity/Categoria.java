@@ -1,5 +1,6 @@
 package br.com.fiap.entity;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
@@ -18,8 +19,10 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="tb_categoria_estabelecimento")
-public class Categoria {
+public class Categoria implements Serializable{
 	
+	private static final long serialVersionUID = 4210781811729557881L;
+
 	@Id
 	@SequenceGenerator(name="categoria", sequenceName="sq_tb_categoria",allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator = "categoria")

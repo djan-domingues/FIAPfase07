@@ -1,5 +1,6 @@
 package br.com.fiap.entity;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,7 +21,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="tb_produto")
-public class Produto {
+public class Produto implements Serializable{
+
+	private static final long serialVersionUID = 4836884472854904515L;
 
 	@Id
 	@SequenceGenerator(name="produto", sequenceName="sq_tb_produto",allocationSize = 1)
