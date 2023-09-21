@@ -6,7 +6,7 @@
 	<persistence-unit name="atividadeFIAPfase2-2">
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.Oracle12cDialect" />
 			<property name="javax.persistence.jdbc.driver"
